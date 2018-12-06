@@ -14,12 +14,14 @@ public class AutorBean {
 		return autor;
 	}
 
-	public void gravar() {
+	public String gravar() {
 		System.out.println("Gravando autor " + this.autor.getNome());
 
 		new DAO<Autor>(Autor.class).adiciona(this.autor);
 		
 		//necessário para limpar os dados do componente.
 		this.autor = new Autor();
+		
+		return "livro?faces-redirect=true";
 	}
 }

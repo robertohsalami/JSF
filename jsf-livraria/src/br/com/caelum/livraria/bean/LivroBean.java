@@ -76,5 +76,9 @@ public class LivroBean {
 			throw new ValidatorException(new FacesMessage("ISBN Deveria começar com 1"));
 		}
 	}
+	
+	public String formAutor() {
+		return "autor?faces-redirect=true";
+	}
 
 }

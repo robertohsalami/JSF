@@ -14,7 +14,7 @@
 			<legend>Dados do Livro</legend>
 			<h:panelGrid columns="2">
 				<h:outputLabel value="Título: " for="titulo"></h:outputLabel>
-				<h:inputText id="titulo" value="#{livroBean.livro.titulo}" required="true" requiredMessage="título obrigatório"
+				<h:inputText id="titulo" value="#{livroBean.livro.titulo}" required="true" requiredMessage="Título obrigatório"
 					validatorMessage="título não pode ser superior a 40 caracteres">
 					<f:validateLength maximum="40" />
 					<f:ajax event="blur" render="messages"/>
@@ -22,14 +22,11 @@
 				
 				<h:outputLabel value="ISBN: " for="isbn"></h:outputLabel>
 				<h:inputText id="isbn" value="#{livroBean.livro.isbn}" 
-					validator="#{livroBean.comecaComDigitoUm}">
-					<f:ajax event="keyup" render="messages"/>
+					validator="#{livroBean.comecaComDigitoUm}">					
 				</h:inputText>
 				
 				<h:outputLabel value="Preço: " for="preco"></h:outputLabel>
-				<h:inputText id="preco" value="#{livroBean.livro.preco}">
-					<f:validateDoubleRange minimum="1.0" maximum="1000.00"/>
-				</h:inputText>
+				<h:inputText id="preco" value="#{livroBean.livro.preco}"></h:inputText>
 				
 				<h:outputLabel value="Data de Lançamento: " for="dataLancamento"></h:outputLabel>
 				<h:inputText id="dataLancamento" value="#{livroBean.livro.dataLancamento.time}">
@@ -49,6 +46,10 @@
 			<h:commandButton value="Gravar Autor" action="#{livroBean.gravarAutor}">
 				<f:ajax execute="comboAutor" render="tabelaAutor"/>
 			</h:commandButton>
+			
+			<br />
+			
+			<h:commandLink value="Cadastrar novo autor" action="#{livroBean.formAutor}" immediate="true"/>
 			
 			<h:dataTable value="#{livroBean.autoresDoLivro}" var="autor" id="tabelaAutor">
 				<h:column>
