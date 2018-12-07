@@ -45,8 +45,12 @@ public class LivroBean {
 			FacesContext.getCurrentInstance().addMessage("autor", new FacesMessage("Livro deve ter pelo menos um Autor"));
 			return;
 		}
-
-		new DAO<Livro>(Livro.class).adiciona(this.livro);
+		
+		if(this.livro.getId() == null) {
+			new DAO<Livro>(Livro.class).adiciona(this.livro);			
+		}else {
+			new DAO<Livro>(Livro.class).atualiza(this.livro);
+		}
 		
 		this.livro = new Livro();
 	}
@@ -75,6 +79,14 @@ public class LivroBean {
 		if(!valor.startsWith("1")) {
 			throw new ValidatorException(new FacesMessage("ISBN Deveria começar com 1"));
 		}
+	}
+	
+	public void remover(Livro livro) {
+		new DAO<Livro>(Livro.class).remove(livro);		
+	}	
+		
+	public void removerAutorDoLivro(Autor autor) {
+		this.livro.removeAutor(autor);
 	}
 	
 	public String formAutor() {
