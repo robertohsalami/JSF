@@ -5,22 +5,14 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 
 @Entity
-public class Autor {
+public class Usuario {
 
 	@Id
 	@GeneratedValue
 	private Integer id;
-	private String nome;
 	private String email;
-
-	public String getNome() {
-		return nome;
-	}
-
-	public void setNome(String nome) {
-		this.nome = nome;
-	}
-
+	private String senha;
+	
 	public Integer getId() {
 		return id;
 	}
@@ -35,6 +27,14 @@ public class Autor {
 
 	public void setEmail(String email) {
 		this.email = email;
+	}
+
+	public String getSenha() {
+		return senha;
+	}
+
+	public void setSenha(String senha) {
+		this.senha = senha;
 	}
 
 }
