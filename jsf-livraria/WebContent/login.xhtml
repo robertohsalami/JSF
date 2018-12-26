@@ -9,7 +9,9 @@
 	<ui:composition template="_template.xhtml">		
 		
 	
-		<ui:define name="titulo">Login</ui:define>
+		<ui:define name="titulo">
+			<p:outputPanel>Login</p:outputPanel>		
+		</ui:define>
 		
 		<ui:define name="conteudo">			
 			
@@ -26,7 +28,9 @@
 						<p:message for="email" id="messageEmail"/>
 						
 						<p:outputLabel value="Senha: " for="senha" />
-						<p:password id="senha" value="#{loginBean.usuario.senha}" feedback="true" required="true"/>										
+						<p:password id="senha" value="#{loginBean.usuario.senha}" feedback="true" 
+							promptLabel="Digite a sua senha" weakLabel="Fraca"
+							goodLabel="Bom" strongLabel="Forte"/>										
 						<p:message for="senha" id="messageSenha"/>
 						
 						<p:commandButton value="Efetue Login" action="#{loginBean.efetuaLogin}" update="@form" process="@form"/>
