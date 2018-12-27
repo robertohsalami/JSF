@@ -27,6 +27,16 @@ public class Livro {
 
 	@ManyToMany(fetch=FetchType.EAGER)
 	private List<Autor> autores = new ArrayList<Autor>();
+	
+	private String genero;
+
+	public String getGenero() {
+		return genero;
+	}
+
+	public void setGenero(String genero) {
+		this.genero = genero;
+	}
 
 	public List<Autor> getAutores() {
 		return autores;
