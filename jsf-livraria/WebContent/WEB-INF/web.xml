@@ -10,11 +10,16 @@
     <servlet-name>Faces Servlet</servlet-name>
     <url-pattern>*.xhtml</url-pattern>
   </servlet-mapping>
-  
-  	<!-- Define ícones do Primefaces -->
+
+	<!-- Define ícones do Primefaces -->
 	<context-param>
 		<param-name>primefaces.FONT_AWESOME</param-name>
 		<param-value>true</param-value>
+	</context-param>
+	
+	<context-param>
+    	<param-name>primefaces.THEME</param-name>
+    	<param-value>#{temaBean.tema}</param-value>
 	</context-param>
   
   <context-param>
