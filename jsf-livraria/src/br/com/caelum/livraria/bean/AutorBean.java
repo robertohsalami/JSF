@@ -1,20 +1,25 @@
 package br.com.caelum.livraria.bean;
 
+import java.io.Serializable;
 import java.util.List;
 
-import javax.faces.bean.ManagedBean;
-import javax.faces.bean.ViewScoped;
+import javax.faces.view.ViewScoped;
+import javax.inject.Inject;
+import javax.inject.Named;
 
+import br.com.caelum.livraria.dao.AutorDao;
 import br.com.caelum.livraria.dao.DAO;
 import br.com.caelum.livraria.modelo.Autor;
 import br.com.caelum.livraria.util.RedirectView;
 
-@ManagedBean
+@Named
 @ViewScoped
-public class AutorBean {
+public class AutorBean implements Serializable{
 
 	private Autor autor = new Autor();
 	private Integer autorId;
+	@Inject
+	private AutorDao dao;	
 
 	public Autor getAutor() {
 		return autor;
@@ -36,9 +41,9 @@ public class AutorBean {
 		System.out.println("Gravando autor " + this.autor.getNome());
 		
 		if(this.autor.getId() == null) {
-			new DAO<Autor>(Autor.class).adiciona(this.autor);			
+			this.dao.adiciona(this.autor);			
 		}else {
-			new DAO<Autor>(Autor.class).atualiza(autor);
+			this.dao.atualiza(autor);
 		}
 		
 		
@@ -49,11 +54,11 @@ public class AutorBean {
 	}
 	
 	public List<Autor> getListaTodos(){
-		return new DAO<Autor>(Autor.class).listaTodos();
+		return this.dao.listaTodos();
 	}
 	
 	public void removerAutor(Autor autor) {
-		new DAO<Autor>(Autor.class).remove(autor);
+		this.dao.remove(autor);
 	}
 	
 	public void carregar(Autor autor) {
@@ -61,7 +66,7 @@ public class AutorBean {
 	}
 	
 	public void carregarAutorPeloId() {
-		this.autor = new DAO<Autor>(Autor.class).buscaPorId(autorId);		
+		this.autor = this.dao.buscaPorId(autorId);		
 	}
 	
 }
