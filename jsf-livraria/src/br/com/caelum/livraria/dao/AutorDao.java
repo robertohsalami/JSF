@@ -1,5 +1,6 @@
 package br.com.caelum.livraria.dao;
 
+import java.io.Serializable;
 import java.util.List;
 
 import javax.annotation.PostConstruct;
@@ -8,7 +9,7 @@ import javax.persistence.EntityManager;
 
 import br.com.caelum.livraria.modelo.Autor;
 
-public class AutorDao {
+public class AutorDao implements Serializable{
 
 	@Inject
 	EntityManager em;
