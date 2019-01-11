@@ -9,6 +9,7 @@ import javax.persistence.EntityManager;
 
 import br.com.caelum.livraria.modelo.Autor;
 
+@SuppressWarnings("serial")
 public class AutorDao implements Serializable{
 
 	@Inject

@@ -17,11 +17,11 @@ import br.com.caelum.livraria.dao.AutorDao;
 import br.com.caelum.livraria.dao.LivroDao;
 import br.com.caelum.livraria.modelo.Autor;
 import br.com.caelum.livraria.modelo.Livro;
-import br.com.caelum.livraria.modelo.LivroDataModel;
+import br.com.caelum.livraria.tx.Transacional;
 
 @Named
 @ViewScoped
-public class LivroBean implements Serializable{
+public class LivroBean implements Serializable {
 
 	/**
 	 * 
@@ -31,24 +31,19 @@ public class LivroBean implements Serializable{
 	private Integer autorId;
 	private Integer livroId;
 	private List<Livro> livros;
-	//private LivroDataModel livroDataModel = new LivroDataModel();
-	
+
 	@Inject
 	LivroDao livroDao;
-	
+
 	@Inject
 	AutorDao autorDao;
-	
+
 	private List<String> generos = Arrays.asList("Romance", "Drama", "Ação");
 
 	public List<String> getGeneros() {
-	    return generos;
+		return generos;
 	}
-	
-	/*public LivroDataModel getLivroDataModel() {
-		return livroDataModel;
-	}*/
-	
+
 	public Integer getAutorId() {
 		return autorId;
 	}
@@ -64,7 +59,8 @@ public class LivroBean implements Serializable{
 	public Livro getLivro() {
 		return livro;
 	}
-
+	
+	@Transacional
 	public void gravar() {
 		System.out.println("Gravando Livro: " + this.livro.getTitulo());
 
@@ -114,9 +110,12 @@ public class LivroBean implements Serializable{
 			throw new ValidatorException(new FacesMessage("ISBN Deveria começar com 1"));
 		}
 	}
-
+	
+	@Transacional
 	public void remover(Livro livro) {
+		System.out.println("Removendo Livro");
 		livroDao.remove(livro);
+		this.livros = livroDao.listaTodos();
 	}
 
 	public void removerAutorDoLivro(Autor autor) {
@@ -140,7 +139,7 @@ public class LivroBean implements Serializable{
 	}
 
 	public boolean precoEhMenor(Object valorColuna, Object filtroDigitado, Locale locale) {
-		
+
 		// tirando espaços do filtro
 		String textoDigitado = (filtroDigitado == null) ? null : filtroDigitado.toString().trim();
 
