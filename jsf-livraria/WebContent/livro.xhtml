@@ -129,10 +129,7 @@
 					</h:outputText>
 				</p:column>
 				<p:column headerText="Alterar">
-					<h:commandLink value="altera">
-						<f:setPropertyActionListener target="#{livroBean.livro}"
-							value="#{livro}" />
-					</h:commandLink>
+					<h:commandLink value="altera" action="#{livroBean.carregar(livro)}"></h:commandLink>
 				</p:column>
 				<p:column headerText="Remover">
 					<h:commandLink value="remove" action="#{livroBean.remover(livro)}"></h:commandLink>

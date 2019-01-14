@@ -38,6 +38,9 @@ public class LivroBean implements Serializable {
 	@Inject
 	AutorDao autorDao;
 
+	@Inject
+	FacesContext context;
+
 	private List<String> generos = Arrays.asList("Romance", "Drama", "Ação");
 
 	public List<String> getGeneros() {
@@ -60,6 +63,11 @@ public class LivroBean implements Serializable {
 		return livro;
 	}
 	
+	public void carregar(Livro livro) {
+		System.out.println("Carregando livro");
+		this.livro = livroDao.buscaPorId(livro.getId());
+	}
+
 	@Transacional
 	public void gravar() {
 		System.out.println("Gravando Livro: " + this.livro.getTitulo());
@@ -68,8 +76,7 @@ public class LivroBean implements Serializable {
 			// throw new RuntimeException("Livro deve ter pelo menos um Autor.");
 			// Obtemos uma referência do contexto JSF no momento da chamada do método
 			// através de FacesContext.getCurrentInstance()
-			FacesContext.getCurrentInstance().addMessage("autor",
-					new FacesMessage("Livro deve ter pelo menos um Autor"));
+			context.addMessage("autor", new FacesMessage("Livro deve ter pelo menos um Autor"));
 			return;
 		}
 
@@ -110,7 +117,7 @@ public class LivroBean implements Serializable {
 			throw new ValidatorException(new FacesMessage("ISBN Deveria começar com 1"));
 		}
 	}
-	
+
 	@Transacional
 	public void remover(Livro livro) {
 		System.out.println("Removendo Livro");

@@ -2,5 +2,6 @@
 <!-- Configurando o gerenciador de transação, não funciona só criando anotações, tem que deixar explicito no XML -->
 <interceptors>
 	<class>br.com.caelum.livraria.tx.GerenciadorDeTransacao</class>
+	<class>br.com.caelum.livraria.tx.TempoDeExecucaoInterceptor</class>
 </interceptors>
 </beans>

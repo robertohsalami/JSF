@@ -1,9 +1,23 @@
 package br.com.caelum.livraria.modelo;
 
-public class Venda {
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.Id;
+import javax.persistence.ManyToOne;
 
+@Entity
+public class Venda {
+	
+	@Id @GeneratedValue
+	private Integer id;
+	
+	//relacionamento com a tabela Livro. Uma venda está associada com um livro.
+	//Varias vendas são associadas com um livro
+	@ManyToOne
 	private Livro livro;
 	private Integer quantidade;
+	
+	public Venda() {}
 
 	public Venda(Livro livro, Integer quantidade) {
 		super();
